@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "bin": {
+    "github-mcp" : "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 775 build/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "files": ["build"]
+}
