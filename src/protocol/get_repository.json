@@ -1,0 +1,31 @@
+{
+  "request": {
+    "jsonrpc": "2.0",
+    "method": "get_repository",
+    "params": {
+      "owner": "Simow03",
+      "repo": "github-mcp-server"
+    },
+    "id": 1
+  },
+  "response": {
+    "jsonrpc": "2.0",
+    "result": {
+      "description": null,
+      "default_branch": "main",
+      "visibility": "private",
+      "archived_status": false
+    },
+    "id": "1"
+  },
+  "error-case": {
+    "response": {
+      "jsonrpc": "2.0",
+      "error": {
+        "code": -32603,
+        "message": "Internal error"
+      },
+      "id": "1"
+    }
+  }
+}

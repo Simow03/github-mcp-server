@@ -1,0 +1,1 @@
+//this file will start the server and read the stdin
