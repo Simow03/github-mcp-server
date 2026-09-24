@@ -45,3 +45,13 @@ Need to consider later on the design process :
 - Filtering issues lists to only have the issues (it might include PRs as well which would be confusing) and vise versa.
 - the [write] labeled tools should come with some kind of disclaimer that it may cause some external change so it should be handled differently.
 - Every change that is meant to be affecting the state of the issue or pr needs to check the current state before modifying it to avoid conflicts.
+
+## Weekly recap
+
+For this week I learned what is an MCP, what is it for, why would we need it in the first place (if we already have APIs for the same purpose). I learned about the MCP concepts that made a clear distinction that I wasn't considering before about who controls which concept. I also got into transports, where I get the difference between local servers that uses stdio for communication and HTTP which exposes the sever over a network but it has to come with a layer of security OAuth. Lastly is the JSON-RCP protocol.
+- Nailed : MCP, concepts, transports.
+- Shaky / needs practice : JSON-RPC 2.0
+- Hardest / needs revision : Interactive staging with Git `git add -i / -p`
+Some key takeaways : 
+- For stdio servers never use `console.log()`, as it writes to the standard output which means it will corrupt the JSON-RPC messages and break the server. Best practices would be to write to stderr or files.
+- JSON is just a data format. While JSON-RPC is a structured communication protocol that is used to execute actions or command a machine, that is happened to be written in JSON format. 
