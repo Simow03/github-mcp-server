@@ -1,11 +1,10 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
-import { Octokit } from "octokit";
 import "dotenv/config";
 
-const GITHUB_PAT = process.env.GITHUB_PAT;
+import { registerTools } from "./registerTools";
 
-const octokit = new Octokit({ auth: GITHUB_PAT});
+
 
 //create server instance
 const server = new McpServer({
@@ -16,20 +15,11 @@ const server = new McpServer({
 //main function to run the server
 async function main() {
   const transport = new StdioServerTransport();
+
+  registerTools(server);
+
   await server.connect(transport);
-
-  async function getRateLimit() {
-    const response = await octokit.request("GET /rate_limit", {
-      headers: {
-        "X-GitHub-Api-Version": "2026-03-10",
-      },
-    });
-
-    console.log(response);
-  }
-
   console.error("GitHub MCP Server is running on stdio");
-  getRateLimit();
 }
 
 main().catch((error) => {
