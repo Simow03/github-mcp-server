@@ -22,13 +22,18 @@ async function registerTools(server: McpServer) {
       },
     },
     async ({ owner, repo }) => {
-      const response = await octokit.request(`GET /repos/${owner}/${repo}`, {
-        owner,
-        repo,
-        headers: {
-          "X-GitHub-Api-Version": "2026-03-10",
-        },
-      });
+      let response;
+      try {
+        response = await config.octokit.request("GET /repos/{owner}/{repo}", {
+          owner,
+          repo,
+          headers: {
+            "X-GitHub-Api-Version": "2026-03-10",
+          },
+        });
+      } catch (err) {
+        return GithubErrorHandler(err, `${owner}/${repo}`);
+      }
 
       const output: GetRepositoryOutput = {
         description: response.data.description,
