@@ -23,5 +23,5 @@
 - Permission level per REST endpoint in GitHub : https://docs.github.com/en/rest/authentication/permissions-required-for-fine-grained-personal-access-tokens?apiVersion=2026-03-10
 - MCP Typescript SDK v2 : https://ts.sdk.modelcontextprotocol.io/v2/
 - MCP inspector : https://modelcontextprotocol.io/docs/2026-07-28/tools/inspector
-- GitHub REST endpoints : https://modelcontextprotocol.io/specification/2026-07-28/schema#contentblock
+- GitHub REST endpoints : https://docs.github.com/en/rest/repos/repos?apiVersion=2026-03-10
 - Octokit library to utilize GitHub's REST API : https://github.com/octokit/octokit.js#readme
