@@ -1,10 +1,8 @@
+#!/usr/bin/env node
+
 import { McpServer } from "@modelcontextprotocol/server";
 import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
-import "dotenv/config";
-
-import { registerTools } from "./registerTools";
-
-
+import { registerTools } from "./registerTools.js";
 
 //create server instance
 const server = new McpServer({

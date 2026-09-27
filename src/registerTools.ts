@@ -3,12 +3,10 @@ import {
   getRepositoryInputSchema,
   GetRepositoryOutput,
   getRepositoryOutputSchema,
-} from "./schemas/getRepository.schema";
-import { Octokit } from "octokit";
-
-const GITHUB_PAT = process.env.GITHUB_PAT;
-
-const octokit = new Octokit({ auth: GITHUB_PAT });
+} from "./schemas/getRepository.schema.js";
+import type { GetRepositoryOutput } from "./schemas/getRepository.schema.js";
+import { config } from "./protocol/config.js";
+import { GithubErrorHandler } from "./utils.js";
 
 async function registerTools(server: McpServer) {
 
