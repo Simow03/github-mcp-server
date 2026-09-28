@@ -3,6 +3,7 @@
 import { McpServer } from "@modelcontextprotocol/server";
 import { StdioServerTransport } from "@modelcontextprotocol/server/stdio";
 import { registerTools } from "./registerTools.js";
+import { runConfig } from "./config.js";
 
 //create server instance
 const server = new McpServer({
@@ -12,9 +13,11 @@ const server = new McpServer({
 
 //main function to run the server
 async function main() {
+  const config = runConfig();
+  
   const transport = new StdioServerTransport();
 
-  registerTools(server);
+  registerTools(server, config);
 
   await server.connect(transport);
   console.error("GitHub MCP Server is running on stdio");

@@ -4,10 +4,10 @@ import {
   getRepositoryOutputSchema,
 } from "./schemas/getRepository.schema.js";
 import type { GetRepositoryOutput } from "./schemas/getRepository.schema.js";
-import { config } from "./protocol/config.js";
-import { GithubErrorHandler } from "./utils.js";
+import { type Config } from "./config.js";
+import { GithubErrorHandler, handleVisibility } from "./utils.js";
 
-async function registerTools(server: McpServer) {
+function registerTools(server: McpServer, config: Config) {
   server.registerTool(
     "get_repository",
     {
