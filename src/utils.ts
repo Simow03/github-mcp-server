@@ -51,6 +51,17 @@ export function GithubErrorHandler(err: unknown, target: string) {
           `Github is throttling requests. Retry after ${headers["retry-after"]} seconds.`,
         );
       }
+      /*
+        split the fallback to look for the status code each at it's own:
+        - 429 : can happen without a header, but it always means rate limiting and nothing else.
+        - 403 : is ambiguous and can be used as both rate limiting and permission issues. So without
+          the rate limiting headers, it's only safe to use it as the last fallback for permission problems.
+      */
+      if (err.status === 429) {
+        return toolError(
+          `Github is throttling requests. Wait at least one minute before retrying.`,
+        );
+      }
       return toolError(
         `The server's token is not allowed to read ${target}. Could be missing scope or org SSO authorization.`,
       );
