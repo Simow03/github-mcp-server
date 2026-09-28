@@ -16,7 +16,7 @@ export const getRepositoryInputSchema = z.object({
 export const getRepositoryOutputSchema = z.object({
   description: z.string().nullable(),
   default_branch: z.string(),
-  visibility: z.enum(["public", "private"]),
+  visibility: z.enum(["public", "private", "internal"]),
   archived: z.boolean().describe("whether the repository is archived or not."),
   html_url: z.url(),
   is_fork: z.boolean().describe("whether the repository is a fork or not."),

@@ -1,5 +1,21 @@
 import { RequestError } from "octokit";
 
+export function handleVisibility(
+  visibility: string | undefined,
+  isPrivate: boolean,
+): "private" | "public" | "internal" {
+  if (
+    visibility === "private" ||
+    visibility === "public" ||
+    visibility === "internal"
+  ) {
+    return visibility;
+  }
+
+  //if data.visibility is missing or unrecognized, fallback to the data.private
+  return isPrivate ? "private" : "public";
+}
+
 function toolError(text: string) {
   return {
     content: [

@@ -37,8 +37,10 @@ function registerTools(server: McpServer, config: Config) {
       const output: GetRepositoryOutput = {
         description: response.data.description,
         default_branch: response.data.default_branch,
-        visibility:
-          response.data.visibility === "public" ? "public" : "private",
+        visibility: handleVisibility(
+          response.data.visibility,
+          response.data.private,
+        ),
         archived: response.data.archived,
         html_url: response.data.html_url,
         is_fork: response.data.fork,
@@ -49,7 +51,9 @@ function registerTools(server: McpServer, config: Config) {
         content: [
           {
             type: "text",
-            text: JSON.stringify(output)},],
+            text: JSON.stringify(output),
+          },
+        ],
         structuredContent: output,
       };
     },
