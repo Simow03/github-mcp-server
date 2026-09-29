@@ -7,7 +7,7 @@ import { runConfig } from "./config.js";
 
 //create server instance
 const server = new McpServer({
-  version: "1.0.0",
+  version: "0.1.0",
   name: "github",
 });
 
