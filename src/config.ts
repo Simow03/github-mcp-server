@@ -16,7 +16,10 @@ export function runConfig(): Config {
       onRateLimit: () => false,
       onSecondaryRateLimit: () => false,
     },
+    retry: {
+      doNotRetry: [400, 401, 403, 404, 410, 422, 429, 451],
+    },
   });
 
-  return {octokit};
+  return { octokit };
 }
