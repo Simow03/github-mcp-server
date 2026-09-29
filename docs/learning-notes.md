@@ -2,7 +2,7 @@
 
 ## MCP in my own words
 
-MCP is a new standard way to connect LLMs to different data sources and tools to provide them with more context. It standardizes the host to server interface (`tools/list`, `tools/call`), so any host works with any server. This whole two-way connection process is already built inside the MCP so it makes it easier for the AI applications to access the resources.
+MCP is a new standard way to connect AI applications to different data sources and tools to provide them with more context. It standardizes the host to server interface (`tools/list`, `tools/call`), so any host works with any server. This whole two-way connection process is already built inside the MCP so it makes it easier for the AI applications to access the resources.
 
 ## MCP concept Diagram
 
@@ -37,7 +37,7 @@ Few design notes :
 - I deliberately included `owner` and `repo` as inputs for consistency across all tools.
 - I marked optional inputs with `?`. Every tool can be called only with `owner` and `repo` but the results can be filtered optionally when needed.
 - Keep issues and PRs separate for a tool to only have a single purpose.
-- For the delete_feature_branch, I added `expected_branch_head?` input to check if the branch had any new commits after merging, The server checks if the latest commit HEAD matches the latest merged commit. If yes then we can safely delete it. Otherwise, it should output some kind of warning or heads up before deletion.
+- For the delete_feature_branch, I added `expected_branch_head?` input to check if the branch had any new commits after merging, The server checks if the latest commit HEAD matches the latest merged commit. If yes then we can safely delete it. Otherwise, it should refuse and return a tool error.
 
 Need to consider later on the design process :
 - Including a limit to the list results, since repositories can be huge and might overwhelm the model with bunch of results.
