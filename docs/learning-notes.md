@@ -15,13 +15,13 @@ MCP is a new standard way to connect AI applications to different data sources a
 
 get_repository — returns information about the repository : description, default branch, visibility, archived status ... — inputs : owner, repo [read-only]
 
-list_issues — returns consice issue summaries (might me sorted by state or label) with no pull requests — inputs : owner, repo, state?, label? [read-only]
+list_issues — returns concise issue summaries (might be sorted by state or label) with no pull requests — inputs : owner, repo, state?, label? [read-only]
 
-get_issue — retuns information about one issue : title, body, state, assignees, url ... — inputs : owner, repo, issue_number [read-only]
+get_issue — returns information about one issue : title, body, state, assignees, url ... — inputs : owner, repo, issue_number [read-only]
 
-list_pull_requests — returns consice pull requests summaries (might also be filtered by state or base branch) with no issues — inputs : owner, repo, state?, base_branch? [read-only]
+list_pull_requests — returns concise pull requests summaries (might also be filtered by state or base branch) with no issues — inputs : owner, repo, state?, base?, limit? [read-only]
 
-get_pull_request — returns information about about one pull request : description, author, head and base branches, review state, mergeability, urls ... — inputs : owner, repo, pr_number [read-only]
+get_pull_request — returns information about one pull request : description, author, head and base branches, review state, mergeability, urls ... — inputs : owner, repo, pr_number [read-only]
 
 create_issue_comment — posts a comment on an existing issue — inputs : owner, repo, issue_number, body [write]
 
