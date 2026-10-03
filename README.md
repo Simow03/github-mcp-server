@@ -2,7 +2,23 @@
 
 ## Problem
 
+LLMs can't see your GitHub data. Their knowledge is fixed at training time, so they know nothing about your repositories, your pull requests and what changed. Asking "which PRs are waiting for review on my repo?" would give you a guess at best, refusal at worst.
+
+To work around this you'd have to either: 
+- **Copy-paste or screenshot into the chat** which is manual and only valid for that moment in time. Doesn't scale beyond a few times.
+- **Costumize integration for each of your AI apps** and write the same code to authenticate, handle rate limits, handle errors, and response formats. Done for every app that needs GitHub access.
+
+At some point you will need a reliable way for an AI application to query live GitHub data safely and without per-app integration work.
+
 ## Why MCP 
+
+The Model Context Protocol (MCP) fits this exact problem, since it is an open standard for connecting AI applications to external tools and data sources.
+
+- **Build once, use everywhere**. This server works with any MCP compatible client without changes. 
+- **Can act on errors reliably**. Failures are returned as tool results with clear messages for the model to treat it as intended.
+- **Self-describing tools**. The model knows what's available, what each tool does and how to call each one without hardcoded instructions.
+- **Safe by design**. Tools are labeled read-only so the client knows that they can't modify on GitHub. or write to give access but use the tool with caution.
+- **Local with no extra steps**. The server runs on your machine over stdio. Your GitHub token stays in the server's environment and never sent to the model.
 
 ## Architecture (TBD)
 
