@@ -5,7 +5,7 @@ import {
   listPullRequestsOutputSchema,
   type ListPullRequestsOutput,
 } from "../schemas/listPullRequests.schema.js";
-import { GithubErrorHandler } from "../utils.js";
+import { GithubErrorHandler, hasNextPage } from "../utils.js";
 
 export function registerListPullRequests(server: McpServer, config: Config) {
   server.registerTool(
@@ -13,7 +13,7 @@ export function registerListPullRequests(server: McpServer, config: Config) {
     {
       title: "list pull requests",
       description:
-        "list pull requests in a github repository. returns each pull request's number, title, state, author, draft status, head and base branches, url, and created/updated timestamps.",
+        "list pull requests in a github repository. returns each pull request's number, title, state, author, draft status, merged, merged_at, head and base branches, url, and created/updated timestamps. with a has_more boolean to let the model know if the list is incomplete.",
       inputSchema: listPullRequestsInputSchema,
       outputSchema: listPullRequestsOutputSchema,
       annotations: {
@@ -42,20 +42,20 @@ export function registerListPullRequests(server: McpServer, config: Config) {
 
       const output: ListPullRequestsOutput = {
         pull_requests: response.data.map((pr) => ({
-            number: pr.number,
-            title: pr.title,
-            state: pr.state === "open" ? "open" : "closed",
-            merged: pr.merged_at !== null,
-            draft: pr.draft ?? false,
-            author: pr.user?.login ?? null,
-            head_ref: pr.head.ref,
-            base_ref: pr.base.ref,
-            html_url: pr.html_url,
-            created_at: pr.created_at,
-            updated_at: pr.updated_at,
-            merged_at: pr.merged_at
+          number: pr.number,
+          title: pr.title,
+          state: pr.state === "open" ? "open" : "closed",
+          merged: pr.merged_at !== null,
+          draft: pr.draft ?? false,
+          author: pr.user?.login ?? null,
+          head_ref: pr.head.ref,
+          base_ref: pr.base.ref,
+          html_url: pr.html_url,
+          created_at: pr.created_at,
+          updated_at: pr.updated_at,
+          merged_at: pr.merged_at,
         })),
-        has_more: response.data.length === limit,
+        has_more: hasNextPage(response.headers.link),
       };
 
       return {

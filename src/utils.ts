@@ -28,6 +28,11 @@ function toolError(text: string) {
   };
 }
 
+export function hasNextPage(linkHeader: string | undefined): boolean {
+  if (!linkHeader) return false;
+  return /<[^>]+>;\s*rel="next"/.test(linkHeader);
+}
+
 export function GithubErrorHandler(err: unknown, target: string) {
   //this wraps all unexpected error like dns, timeout, connection drop.
   if (!(err instanceof RequestError)) {
