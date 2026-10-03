@@ -7,7 +7,7 @@ export function runConfig(): Config {
   const githubToken = process.env.GITHUB_PAT;
 
   if (!githubToken) {
-    throw "GITHUB_PAT is required";
+    throw new Error("GITHUB_PAT is required");
   }
 
   const octokit = new Octokit({

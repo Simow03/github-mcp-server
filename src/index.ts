@@ -24,6 +24,7 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("Fatal: error at main(): ", error);
+  const message = error instanceof Error ? error.message : String(error);
+  console.error(`Fatal: error at main(): ${message}`);
   process.exitCode = 1;
 });
