@@ -14,7 +14,6 @@ export const listPullRequestsInputSchema = z.object({
   state: z
     .enum(["open", "closed", "all"])
     .default("open")
-    .optional()
     .describe(
       "specifies which pull requests to list: open, closed (includes merged), or all. defaults to open.",
     ),
@@ -28,7 +27,6 @@ export const listPullRequestsInputSchema = z.object({
     .min(1, { message: "value must be 1 or greater" })
     .max(100, { message: "value cannot exceed 100" })
     .default(30)
-    .optional()
     .describe(
       "indicates the maximum number of pull requests to return, from 1 to 100. defaults to 30.",
     ),
@@ -43,7 +41,7 @@ const pullRequest = z.object({
   author: z.string().nullable(),
   head_ref: z.string(),
   base_ref: z.string(),
-  html_url: z.string(),
+  html_url: z.url(),
   created_at: z.string(),
   updated_at: z.string(),
   merged_at: z.string().nullable(),
@@ -52,7 +50,7 @@ const pullRequest = z.object({
 export const listPullRequestsOutputSchema = z.object({
   pull_requests: z.array(pullRequest),
   //limit only controls how many come back so this helps the model to know when there are more
-  has_more: z.boolean().describe("tells the model that the list might be incomplete. true when the result count equals limit."),
+  has_more: z.boolean().describe("tells the model that the list might be incomplete when true. it shows limit but there are more."),
 });
 
 export type ListPullRequestsOutput = z.infer<
