@@ -6,11 +6,11 @@ LLMs can't see your GitHub data. Their knowledge is fixed at training time, so t
 
 To work around this you'd have to either: 
 - **Copy-paste or screenshot into the chat** which is manual and only valid for that moment in time. Doesn't scale beyond a few times.
-- **Costumize integration for each of your AI apps** and write the same code to authenticate, handle rate limits, handle errors, and response formats. Done for every app that needs GitHub access.
+- **Customize integration for each of your AI apps** and write the same code to authenticate, handle rate limits, handle errors, and response formats. Done for every app that needs GitHub access.
 
 At some point you will need a reliable way for an AI application to query live GitHub data safely and without per-app integration work.
 
-## Why MCP 
+## Why MCP
 
 The Model Context Protocol (MCP) fits this exact problem, since it is an open standard for connecting AI applications to external tools and data sources.
 

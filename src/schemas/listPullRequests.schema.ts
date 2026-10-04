@@ -50,7 +50,7 @@ const pullRequest = z.object({
 export const listPullRequestsOutputSchema = z.object({
   pull_requests: z.array(pullRequest),
   //limit only controls how many come back so this helps the model to know when there are more
-  has_more: z.boolean().describe("tells the model that the list might be incomplete when true. it shows limit but there are more."),
+  has_more: z.boolean().describe("tells the model that the list might be incomplete when true. it shows only limit but GitHub reports another page of results beyond this one."),
 });
 
 export type ListPullRequestsOutput = z.infer<
