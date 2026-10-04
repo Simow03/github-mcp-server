@@ -26,9 +26,6 @@ export function registerGetRepository(server: McpServer, config: Config) {
         response = await config.octokit.request("GET /repos/{owner}/{repo}", {
           owner,
           repo,
-          headers: {
-            "X-GitHub-Api-Version": "2026-03-10",
-          },
         });
       } catch (err) {
         return GithubErrorHandler(err, `${owner}/${repo}`);

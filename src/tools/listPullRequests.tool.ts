@@ -31,9 +31,6 @@ export function registerListPullRequests(server: McpServer, config: Config) {
             state,
             base,
             per_page: limit,
-            headers: {
-              "X-GitHub-Api-Version": "2026-03-10",
-            },
           },
         );
       } catch (err) {
