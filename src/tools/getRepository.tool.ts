@@ -1,0 +1,58 @@
+import { McpServer } from "@modelcontextprotocol/server";
+import type { Config } from "../config.js";
+import {
+  getRepositoryInputSchema,
+  getRepositoryOutputSchema,
+} from "../schemas/getRepository.schema.js";
+import type { GetRepositoryOutput } from "../schemas/getRepository.schema.js";
+import { GithubErrorHandler, handleVisibility } from "../utils.js";
+
+export function registerGetRepository(server: McpServer, config: Config) {
+    server.registerTool(
+    "get_repository",
+    {
+      title: "get repository",
+      description:
+        "get metadata about a github repository, including its description, default branch, visibility, archive status, fork status, url, and last push timestamp.",
+      inputSchema: getRepositoryInputSchema,
+      outputSchema: getRepositoryOutputSchema,
+      annotations: {
+        readOnlyHint: true,
+      },
+    },
+    async ({ owner, repo }) => {
+      let response;
+      try {
+        response = await config.octokit.request("GET /repos/{owner}/{repo}", {
+          owner,
+          repo,
+        });
+      } catch (err) {
+        return GithubErrorHandler(err, `${owner}/${repo}`);
+      }
+
+      const output: GetRepositoryOutput = {
+        description: response.data.description,
+        default_branch: response.data.default_branch,
+        visibility: handleVisibility(
+          response.data.visibility,
+          response.data.private,
+        ),
+        archived: response.data.archived,
+        html_url: response.data.html_url,
+        is_fork: response.data.fork,
+        last_pushed_at: response.data.pushed_at,
+      };
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(output),
+          },
+        ],
+        structuredContent: output,
+      };
+    },
+  );
+}
