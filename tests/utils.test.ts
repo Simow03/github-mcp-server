@@ -4,7 +4,7 @@ import {
   handleVisibility,
   GithubErrorHandler,
 } from "../src/utils.js";
-import { RequestError } from "octokit";
+import { createError } from "./helpers/createError.js";
 
 describe("hasNextPage", () => {
   test("undefined value", () => {
@@ -45,13 +45,6 @@ describe("handleVisibility", () => {
 
 describe("GithubErrorHandler", () => {
   const target = "name/repo";
-
-  function createError(status: number, headers: Record<string, string> = {}) {
-    return new RequestError(`HTTP ${status}`, status, {
-      request: { method: "GET", url: "", headers: {} },
-      response: { status, headers, url: "", data: {} },
-    });
-  }
 
   function textOf(result: ReturnType<typeof GithubErrorHandler>) {
     return result.content[0].text;
