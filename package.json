@@ -9,18 +9,22 @@
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
     "start": "npm run build && node ./build/index.js",
-    "dev": "tsx src/index.ts"
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
   },
   "files": [
     "build"
   ],
   "dependencies": {
-    "@modelcontextprotocol/server": "^2.0.0",
+    "@modelcontextprotocol/client": "^2.3.1",
+    "@modelcontextprotocol/server": "^2.3.1",
     "dotenv": "^18.0.3",
     "octokit": "^5.0.5",
     "zod": "^4.6.5"
