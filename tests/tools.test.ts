@@ -11,7 +11,8 @@ import {
   repositoryFixtureResponse,
 } from "./fixtures/response.js";
 import { mergedPull, openPull } from "./fixtures/pullRequest.js";
-import { ListPullRequestsOutput } from "../src/schemas/listPullRequests.schema.js";
+import { createError, textOf } from "./helpers/createError.js";
+import { GithubErrorHandler } from "../src/utils.js";
 
 let ctx: Awaited<ReturnType<typeof createTestClient>>;
 
@@ -202,5 +203,42 @@ describe("list_pull_requests", () => {
       expect(result.isError).toBeFalsy();
       expect(result.structuredContent).toMatchObject({ has_more: expected });
     });
+  });
+});
+
+describe("tool errors and rejected arguments", () => {
+  test.each(["get_repository", "list_pull_requests"])(
+    '%s resolves with isError: true and "not found" text',
+    async (tool) => {
+      ctx.request.mockRejectedValueOnce(createError(404));
+
+      const result = await ctx.client.callTool({
+        name: tool,
+        arguments: { owner: "o", repo: "r" },
+      });
+
+      expect(result.isError).toBeTruthy();
+      expect(textOf(result)).toContain(
+        "was not found",
+      );
+    },
+  );
+
+  test("list_pull_requests input validation", async () => {
+
+    ctx.request.mockResolvedValueOnce({
+      data: pullRequestsFixture,
+      headers: {},
+    });
+
+    const result = await ctx.client.callTool({
+      name: "list_pull_requests",
+      arguments: {owner: "o", repo: "r", limit: 500},
+    });
+
+    expect(ctx.request).not.toHaveBeenCalled(); 
+
+    expect(result.isError).toBeTruthy();
+    expect(textOf(result)).toContain("Input validation error");
   });
 });

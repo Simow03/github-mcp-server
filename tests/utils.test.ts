@@ -4,7 +4,7 @@ import {
   handleVisibility,
   GithubErrorHandler,
 } from "../src/utils.js";
-import { createError } from "./helpers/createError.js";
+import { createError, textOf } from "./helpers/createError.js";
 
 describe("hasNextPage", () => {
   test("undefined value", () => {
@@ -46,9 +46,6 @@ describe("handleVisibility", () => {
 describe("GithubErrorHandler", () => {
   const target = "name/repo";
 
-  function textOf(result: ReturnType<typeof GithubErrorHandler>) {
-    return result.content[0].text;
-  }
   test("a non RequestError instance", () => {
     const error = GithubErrorHandler(new Error("test"), target);
     expect(textOf(error)).toContain("Unexpected error while fetching");
