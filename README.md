@@ -46,7 +46,7 @@ Failures are returned as `isError` results, so the server never crashes and the 
 
 ## How to run
 
-**Requirements:** Node ≥ 20, a GitHub personal access token, WSL or Git Bash.
+**Requirements:** Node >= 22.12, a GitHub personal access token, WSL or Git Bash.
 
 **1. Install and configure**
 
