@@ -20,7 +20,10 @@ The Model Context Protocol (MCP) fits this exact problem, since it is an open st
 - **Safe by design**. Tools are labeled read-only so the client knows that they can't modify on GitHub. or write to give access but use the tool with caution.
 - **Your token never reaches the model**. The server holds the GitHub token and uses it only to call GitHub. The model sees tool results, never credentials.
 
-## Architecture (TBD)
+## Architecture
+
+This diagram shows the main request path, the token source, and how logs and tool failures are handled.
+![architecture diagram](docs/assets/architecture.png)
 
 ## Tools
 
