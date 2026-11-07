@@ -1,4 +1,4 @@
-import { mergedPull, openPull } from "./pullRequest";
+import { mergedPull, openPull } from "./pullRequest.js";
 
 export const repositoryFixture = {
   description: null,

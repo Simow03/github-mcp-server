@@ -6,7 +6,7 @@ MCP is a new standard way to connect AI applications to different data sources a
 
 ## MCP concept Diagram
 
-![alt text](image.png)
+![MCP diagram](assets/mcp.png)
 
 ## Server tools
 

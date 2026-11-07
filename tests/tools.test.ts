@@ -12,7 +12,6 @@ import {
 } from "./fixtures/response.js";
 import { mergedPull, openPull } from "./fixtures/pullRequest.js";
 import { createError, textOf } from "./helpers/createError.js";
-import { GithubErrorHandler } from "../src/utils.js";
 
 let ctx: Awaited<ReturnType<typeof createTestClient>>;
 
@@ -225,11 +224,6 @@ describe("tool errors and rejected arguments", () => {
   );
 
   test("list_pull_requests input validation", async () => {
-
-    ctx.request.mockResolvedValueOnce({
-      data: pullRequestsFixture,
-      headers: {},
-    });
 
     const result = await ctx.client.callTool({
       name: "list_pull_requests",

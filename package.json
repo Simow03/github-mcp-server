@@ -11,7 +11,8 @@
     "start": "npm run build && node ./build/index.js",
     "dev": "tsx src/index.ts",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.test.json"
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
@@ -30,6 +31,6 @@
     "zod": "^4.6.5"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.12"
   }
 }
