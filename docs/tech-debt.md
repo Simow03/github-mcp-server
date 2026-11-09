@@ -25,7 +25,6 @@ fixed, move it to **Resolved** with the commit.
 | ID | Debt | Evidence | Impact | Trigger / fix |
 | :-- | :-- | :-- | :-- | :-- |
 | D1 | The client SDK ships as a runtime dependency | `package.json:27`; only imported by `tests/helpers/createTestClient.ts:1`. | Production installs carry test-only code. | Before the first publish: move to `devDependencies`. |
-| D2 | No CI | No `.github/` directory; PR #6 reported no checks. | Typecheck, tests and build are not enforced on PRs. | Next infra session: Actions on push/PR running `npm ci`, `typecheck`, `test`, `build`. |
 | D3 | The engine floor accepts unsupported Node versions | `package.json:34` is `>=22.12`, but installed vitest 5.0.3 requires `^22.12.0 \|\| ^24.0.0 \|\| >=26.0.0`; npm only warns by default. | Contributors on Node 23/25 hit confusing failures. | With the CI matrix: mirror the vitest range, or add `engine-strict`. |
 | D4 | No formatter/linter, and several files lack a final newline | No Prettier/ESLint in `package.json`; no final LF in `.gitignore`, `vitest.config.js`, `tests/fixtures/repository.ts`, `README.md`, `docs/learning-notes.md` (verified last byte). | Noisy diffs and style drift. | Formatter day: Prettier with `endOfLine: lf`, then reformat once. |
 
@@ -53,3 +52,4 @@ fixed, move it to **Resolved** with the commit.
 | 2026-11-04 | Latent NodeNext import fixed (`tests/fixtures/repository.ts:1` → `./pullRequest.js`); unused test import and mock removed. | `38f530c` |
 | 2026-11-04 | Node engine aligned with vitest (`package.json:34`, README Requirements). | `d16a625` |
 | 2026-11-04 | README Architecture section with a concrete diagram (`docs/assets/architecture.png`); image renamed; `docs/learning-notes.md:9` fixed. | `0a6eaf0` |
+| 2026-11-09 | CI is present and the actions `npm ci`, `typecheck`, `test`, `build` run on push/PR. | `913fbf2q` |
