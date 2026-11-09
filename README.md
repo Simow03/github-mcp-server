@@ -132,3 +132,4 @@ Restart the host after editing it.
 - MCP inspector : https://modelcontextprotocol.io/docs/2026-07-28/tools/inspector
 - GitHub REST endpoints : https://docs.github.com/en/rest/repos/repos?apiVersion=2026-03-10
 - Octokit library to utilize GitHub's REST API : https://github.com/octokit/octokit.js#readme
+- GitHub action `setup-node` usage : https://github.com/actions/setup-node
