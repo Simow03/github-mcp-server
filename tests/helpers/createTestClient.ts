@@ -23,5 +23,13 @@ export async function createTestClient() {
     client.connect(clientTransport),
   ]);
 
-  return { client, request, close: () => client.close() };
+  return {
+    client,
+    server,
+    request,
+    close: async () => {
+      await client.close();
+      await server.close();
+    },
+  };
 }
