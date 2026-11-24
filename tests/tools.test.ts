@@ -20,6 +20,7 @@ beforeEach(async () => {
 });
 afterEach(async () => {
   await ctx.close();
+  expect(ctx.server.server.transport).toBeUndefined();
 });
 
 test("all tools are present", async () => {
